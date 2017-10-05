@@ -10,9 +10,9 @@ const {
   Surface, 
   Path
 } = Svg
-import Pen from '../scripts/pen'
-import Point from '../scripts/point'
-
+import Pen from '../tools/pen'
+import Point from '../tools/point'
+// import Bezier from '../tools/bezier'
 
 export default class Whiteboard extends React.Component {
 
