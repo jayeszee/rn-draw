@@ -10,7 +10,9 @@ const {
   Surface, 
   Path
 } = Svg
-import Pen from '../scripts/Pen'
+import Pen from '../scripts/pen'
+import Point from '../scripts/point'
+
 
 export default class Whiteboard extends React.Component {
 
@@ -34,9 +36,10 @@ export default class Whiteboard extends React.Component {
   }
 
   onTouch(evt) {
-    let [x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp];
-    let newCurrentPoints = this.state.currentPoints;
-    newCurrentPoints.push({x, y});
+    let [x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp]
+    let newPoint = new Point(x, y, timestamp)
+    let newCurrentPoints = this.state.currentPoints
+    newCurrentPoints.push(newPoint)
 
     this.setState({
       previousStrokes: this.state.previousStrokes,
