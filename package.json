@@ -1,5 +1,5 @@
 {
-  "name": "rn-draw",
+  "name": "rn-expo-draw",
   "version": "0.0.1",
   "description": "Drawing library for react-native using svg.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "none"
+    "url": "https://github.com/jayeszee/rn-expo-draw.git"
   },
   "keywords": [
     "react-native",
@@ -20,8 +20,12 @@
     "expo"
   ],
   "author": "Jack Zhang <j@ckzhang.com>",
-  "license": "ISC",
+  "bugs": {
+    "url" : "https://github.com/jayeszee/rn-expo-draw/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
+    "@expo/vector-icons": "*",
     "expo": "*",
     "react": "*",
     "react-native": "*"

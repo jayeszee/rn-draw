@@ -90,10 +90,9 @@ export default class Whiteboard extends React.Component {
         style={[
           styles.drawContainer,
           this.props.containerStyle,
-          {width: this.props.width, height: this.props.height}
         ]}>
         <View {...this._panResponder.panHandlers}>
-          <Svg style={styles.drawSurface} width={this.props.width} height={this.props.height}>
+          <Svg style={styles.drawSurface}>
             <G>
               {this.state.previousStrokes}
               <Path
@@ -118,5 +117,7 @@ let styles = StyleSheet.create({
   },
   drawSurface: {
     backgroundColor: 'transparent',
+    height: '100%',
+    width: '100%'
   },
 });
