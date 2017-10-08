@@ -28,7 +28,10 @@ import RNDraw from 'rn-expo-draw'
   ```
   
 ## Work in progress
-Pen color
-Stroke width
-Smoothing out pen strokes (curves)
+Pen color 
+
+Stroke width 
+
+Smoothing out pen strokes (curves) 
+
 Non-expo version
