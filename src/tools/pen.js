@@ -11,6 +11,11 @@ export default class Pen {
     }
   }
 
+  rewindStroke() {
+    if (this.strokes.length < 1) return
+    this.strokes.pop()
+  }
+
   setOffset(options) {
     if (!options) return
     this._offsetX = options.x;
