@@ -3,6 +3,7 @@ import {
   View,
   PanResponder,
   StyleSheet,
+  Platform
 } from 'react-native'
 import {Svg} from 'expo'
 const {
@@ -12,8 +13,8 @@ const {
 } = Svg
 import Pen from '../tools/pen'
 import Point from '../tools/point'
+const {OS} = Platform
 // import Bezier from '../tools/bezier'
-
 export default class Whiteboard extends React.Component {
 
   constructor(props, context) {
@@ -26,17 +27,40 @@ export default class Whiteboard extends React.Component {
       pen: new Pen(),
     };
 
+    this.rewind = this.rewind.bind(this)
+    this._YOffset = this.props.offset.y
+    this._XOffset = this.props.offset.x
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gs) => true,
       onMoveShouldSetPanResponder: (evt, gs) => true,
       onPanResponderGrant: (evt, gs) => this.onResponderGrant(evt, gs),
       onPanResponderMove: (evt, gs) => this.onResponderMove(evt, gs),
       onPanResponderRelease: (evt, gs) => this.onResponderRelease(evt, gs)
+    })
+    const rewind = props.rewind || function (){}
+    this._clientEvents = {
+      rewind: rewind(this.rewind)
+    }
+    
+  }
+
+  rewind() {
+    if (this.state.currentPoints.length > 0 || this.state.previousStrokes.length < 1) return
+    let strokes = this.state.previousStrokes
+    strokes.pop()
+
+    this.state.pen.rewindStroke()
+    
+    this.setState({
+      previousStrokes: strokes,
+      currentPoints: [],
+      tracker: this.state.tracker - 1,
     });
   }
 
   onTouch(evt) {
-    let [x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp]
+    if (OS === 'ios' ) let [x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp]
+    else if (OS === 'android') let [x, y, timestamp] = [evt.nativeEvent.pageX - (this._XOffset || 0), evt.nativeEvent.pageY - (this._YOffset || 0), evt.nativeEvent.timestamp]
     let newPoint = new Point(x, y, timestamp)
     let newCurrentPoints = this.state.currentPoints
     newCurrentPoints.push(newPoint)
@@ -57,7 +81,7 @@ export default class Whiteboard extends React.Component {
   }
 
   onResponderRelease() {
-    let strokes = this.state.previousStrokes;
+    let strokes = this.state.previousStrokes
     if (this.state.currentPoints.length > 0) {
       strokes.push(
         <Path
