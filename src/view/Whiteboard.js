@@ -28,8 +28,7 @@ export default class Whiteboard extends React.Component {
     };
 
     this.rewind = this.rewind.bind(this)
-    this._YOffset = this.props.offset.y
-    this._XOffset = this.props.offset.x
+    this._Offset = this.props.offset || {}    
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gs) => true,
       onMoveShouldSetPanResponder: (evt, gs) => true,
@@ -59,8 +58,9 @@ export default class Whiteboard extends React.Component {
   }
 
   onTouch(evt) {
-    if (OS === 'ios' ) let [x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp]
-    else if (OS === 'android') let [x, y, timestamp] = [evt.nativeEvent.pageX - (this._XOffset || 0), evt.nativeEvent.pageY - (this._YOffset || 0), evt.nativeEvent.timestamp]
+    let x, y, timestamp
+    if (OS === 'ios' )[x, y, timestamp] = [evt.nativeEvent.locationX, evt.nativeEvent.locationY, evt.nativeEvent.timestamp]
+    else if (OS === 'android') [x, y, timestamp] = [evt.nativeEvent.pageX - (this._Offset.x || 0), evt.nativeEvent.pageY - (this._Offset.y || 0), evt.nativeEvent.timestamp]    
     let newPoint = new Point(x, y, timestamp)
     let newCurrentPoints = this.state.currentPoints
     newCurrentPoints.push(newPoint)
