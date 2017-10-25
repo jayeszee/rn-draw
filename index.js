@@ -1,3 +1,3 @@
-import Whiteboard from './src/view/Whiteboard'
+import pad from './src/view/pad'
 
-module.exports = Whiteboard
+module.exports = pad
