@@ -85,8 +85,8 @@ export default class Whiteboard extends React.Component {
       <Path
         key={this.state.tracker}
         d={this.state.pen.pointsToSvg(this.state.currentPoints)}
-        stroke="#000000"
-        strokeWidth={4}
+        stroke={props.color || '#000000'}
+        strokeWidth={props.strokeWidth || 4}
         fill="none"
       />
     )
