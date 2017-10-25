@@ -80,25 +80,24 @@ export default class Whiteboard extends React.Component {
 
   onResponderRelease() {
     let strokes = this.state.previousStrokes
-    if (this.state.currentPoints.length > 0) {
-      strokes.push(
-        <Path
-          key={this.state.tracker}
-          d={this.state.pen.pointsToSvg(this.state.currentPoints)}
-          stroke="#000000"
-          strokeWidth={4}
-          fill="none"
-        />
-      );
-    }
+    if (this.state.currentPoints.length < 1) return
+    let newElement = (
+      <Path
+        key={this.state.tracker}
+        d={this.state.pen.pointsToSvg(this.state.currentPoints)}
+        stroke="#000000"
+        strokeWidth={4}
+        fill="none"
+      />
+    )
 
-    this.state.pen.addStroke(this.state.currentPoints);
-
+    this.state.pen.addStroke(this.state.currentPoints)
+    
     this.setState({
-      previousStrokes: strokes,
+      previousStrokes: [...this.state.previousStrokes, newElement],
       currentPoints: [],
       tracker: this.state.tracker + 1,
-    });
+    })
   }
 
   _onLayoutContainer = (e) => {
