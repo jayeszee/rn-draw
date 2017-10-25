@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Platform
 } from 'react-native'
-import {Svg} from 'expo'
+import {Svg} from '../config'
 const {
   G, 
   Surface, 
