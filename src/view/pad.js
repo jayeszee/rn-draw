@@ -50,7 +50,7 @@ export default class Whiteboard extends React.Component {
     this.state.pen.rewindStroke()
     
     this.setState({
-      previousStrokes: strokes,
+      previousStrokes: [...strokes],
       currentPoints: [],
       tracker: this.state.tracker - 1,
     });
