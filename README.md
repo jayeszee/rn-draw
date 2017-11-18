@@ -13,7 +13,12 @@ Make sure you follow the proper guidelines on https://expo.io to set up your rea
 
 Install rn-draw with `npm install -S rn-draw`  or  `yarn add rn-draw`
 
-NOTE: if you are using expo version <= 21 use `npm install -S rn-expo-draw@0.0.4`  or  `yarn add rn-expo-draw@0.0.4`
+### Compatibility
+expo version <= 21 or react native <= 48 w/ react 16 alpha 12 --- rn-draw@0.0.4
+
+expo version = 22 or react native = 49 w/ react 16 beta 5 --- >= rn-draw@0.0.5
+
+
 
 # How to use
 ```
@@ -22,6 +27,7 @@ import RNDraw from 'rn-draw'
 <RNDraw
   containerStyle={{backgroundColor: 'rgba(0,0,0,0.01)'}}
   rewind={(undo) => {this._undo = undo}
+  clear={(clear) => {this._clear = clear}
   color={'#000000'}
   strokeWidth={4}
 />
@@ -30,13 +36,19 @@ import RNDraw from 'rn-draw'
 ### Props
 **containerStyle** [Object] - style for the container of the draw component.
 
-**rewind** [Func] - a function for passing the draw component's undo functionality
-
 **color** [String] - string representation of pen color (defaults to '#000000')
 
 **strokeWidth** [Number] - width of pen strokes (defaults to 4)
+
+**rewind** [Func] - a function for passing the draw component's undo functionality
+
+**clear** [Func] - a function for passing the draw component's clear functionality
   
 ## Work in progress
 
 Smoothing out pen strokes (curves) 
+
+Image backgrounds
+
+Optimizations in pointer
 
