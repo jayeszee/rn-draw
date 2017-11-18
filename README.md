@@ -1,6 +1,8 @@
 # React Native Draw
 React native draw tool using react-native-svg.
 
+[![rn-draw.gif](https://s1.gifyu.com/images/rn-draw.gif)](https://gifyu.com/image/pLIr)
+
 # Installation
 
 First install react-native-svg and follow the directions to properly set it up:
