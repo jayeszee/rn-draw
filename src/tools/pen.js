@@ -36,6 +36,10 @@ export default class Pen {
     }
   }
 
+  clear = () => {
+    this.strokes = []
+  }
+
   copy() {
     return new Reaction(this.strokes.slice());
   }
