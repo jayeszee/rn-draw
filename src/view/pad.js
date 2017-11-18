@@ -25,9 +25,8 @@ export default class Whiteboard extends React.Component {
       previousStrokes: [],
       newStroke: [],
       pen: new Pen(),
-    };
+    }
 
-    this.rewind = this.rewind.bind(this)
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gs) => true,
       onMoveShouldSetPanResponder: (evt, gs) => true,
@@ -36,13 +35,15 @@ export default class Whiteboard extends React.Component {
       onPanResponderRelease: (evt, gs) => this.onResponderRelease(evt, gs)
     })
     const rewind = props.rewind || function (){}
+    const clear = props.clear || function (){}
     this._clientEvents = {
-      rewind: rewind(this.rewind)
+      rewind: rewind(this.rewind),
+      clear: clear(this.clear),
     }
     
   }
 
-  rewind() {
+  rewind = () => {
     if (this.state.currentPoints.length > 0 || this.state.previousStrokes.length < 1) return
     let strokes = this.state.previousStrokes
     strokes.pop()
@@ -53,7 +54,17 @@ export default class Whiteboard extends React.Component {
       previousStrokes: [...strokes],
       currentPoints: [],
       tracker: this.state.tracker - 1,
-    });
+    })
+  }
+
+  clear = () => {
+    this.setState({
+      previousStrokes: [],
+      currentPoints: [],
+      newStroke: [],
+      tracker: 0,
+    })
+    this.state.pen.clear()
   }
 
   onTouch(evt) {
@@ -67,7 +78,7 @@ export default class Whiteboard extends React.Component {
       previousStrokes: this.state.previousStrokes,
       currentPoints: newCurrentPoints,
       tracker: this.state.tracker
-    });
+    })
   }
 
   onResponderGrant(evt) {
@@ -129,7 +140,7 @@ export default class Whiteboard extends React.Component {
           {this.props.children}
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -144,4 +155,4 @@ let styles = StyleSheet.create({
   drawSurface: {
     flex: 1,
   },
-});
+})
