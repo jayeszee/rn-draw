@@ -112,7 +112,7 @@ export default class Whiteboard extends React.Component {
           styles.drawContainer,
           this.props.containerStyle,
         ]}>
-        <View {...this._panResponder.panHandlers}>
+        <View style={styles.svgContainer} {...this._panResponder.panHandlers}>
           <Svg style={styles.drawSurface}>
             <G>
               {this.state.previousStrokes}
@@ -135,10 +135,13 @@ export default class Whiteboard extends React.Component {
 
 let styles = StyleSheet.create({
   drawContainer: {
+    flex: 1,
+    display: 'flex',
+  },
+  svgContainer: {
+    flex: 1,
   },
   drawSurface: {
-    backgroundColor: 'transparent',
-    height: '100%',
-    width: '100%'
+    flex: 1,
   },
 });
