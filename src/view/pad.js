@@ -13,8 +13,26 @@ const {
 } = Svg
 import Pen from '../tools/pen'
 import Point from '../tools/point'
+
+import humps from 'humps'
+
 const {OS} = Platform
 // import Bezier from '../tools/bezier'
+
+export const convertStrokesToSvg = (strokes, layout={}) => {
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${layout.width}" height="${layout.height}" version="1.1">
+      <g>
+        ${strokes.map(e => {
+          return `<${e.type.toLowerCase()} ${Object.keys(e.attributes).map(a => {
+            return `${humps.decamelize(a, {separator: '-'})}="${e.attributes[a]}"`
+          }).join(' ')}/>`
+        }).join('\n')}
+      </g>
+    </svg>
+  `
+}
+
 export default class Whiteboard extends React.Component {
 
   constructor(props, context) {
@@ -102,10 +120,12 @@ export default class Whiteboard extends React.Component {
   onResponderRelease() {
     let strokes = this.state.previousStrokes
     if (this.state.currentPoints.length < 1) return
+
+    let points = this.state.currentPoints;
     let newElement =  {
       type: 'Path',
       attributes: {
-        d: this.state.pen.pointsToSvg(this.state.currentPoints),
+        d: this.state.pen.pointsToSvg(points),
         stroke: (this.props.color || '#000000'),
         strokeWidth: (this.props.strokeWidth || 4),
         fill: "none",
@@ -114,7 +134,7 @@ export default class Whiteboard extends React.Component {
       }
     }
 
-    this.state.pen.addStroke(this.state.currentPoints)
+    this.state.pen.addStroke(points)
     
     this.setState({
       previousStrokes: [...this.state.previousStrokes, newElement],
@@ -132,7 +152,7 @@ export default class Whiteboard extends React.Component {
 
   _onLayoutContainer = (e) => {
     this.state.pen.setOffset(e.nativeEvent.layout);
-    this.layout = e.nativeEvent.layout;
+    this._layout = e.nativeEvent.layout;
   }
 
   _renderSvgElement = (e, tracker) => {
@@ -141,6 +161,11 @@ export default class Whiteboard extends React.Component {
     }
 
     return null
+  }
+
+  exportToSVG = () => {
+    const strokes = [...this.state.previousStrokes];
+    return convertStrokesToSvg(strokes, this._layout);
   }
 
   render() {
