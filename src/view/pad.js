@@ -122,6 +122,12 @@ export default class Whiteboard extends React.Component {
     if (this.state.currentPoints.length < 1) return
 
     let points = this.state.currentPoints;
+    if(points.length === 1){
+      let p = points[0];
+      let distance = parseInt(Math.sqrt((this.props.strokeWidth || 4))/2);
+      points.push(new Point(p.x + distance, p.y + distance, p.time));
+    }
+
     let newElement =  {
       type: 'Path',
       attributes: {
