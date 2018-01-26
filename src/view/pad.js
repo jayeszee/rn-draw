@@ -108,7 +108,9 @@ export default class Whiteboard extends React.Component {
         d: this.state.pen.pointsToSvg(this.state.currentPoints),
         stroke: (this.props.color || '#000000'),
         strokeWidth: (this.props.strokeWidth || 4),
-        fill: "none"
+        fill: "none",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
       }
     }
 
@@ -130,6 +132,7 @@ export default class Whiteboard extends React.Component {
 
   _onLayoutContainer = (e) => {
     this.state.pen.setOffset(e.nativeEvent.layout);
+    this.layout = e.nativeEvent.layout;
   }
 
   _renderSvgElement = (e, tracker) => {
@@ -160,6 +163,8 @@ export default class Whiteboard extends React.Component {
                 stroke={this.props.color || "#000000"}
                 strokeWidth={this.props.strokeWidth || 4}
                 fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </G>
           </Svg>
