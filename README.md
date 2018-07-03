@@ -27,15 +27,18 @@ expo version = 22 or react native = 49 w/ react 16 beta 5 --- >= rn-draw@0.0.5
 import RNDraw from 'rn-draw'
   
 <RNDraw
+  strokes={[]}
   containerStyle={{backgroundColor: 'rgba(0,0,0,0.01)'}}
-  rewind={(undo) => {this._undo = undo}
-  clear={(clear) => {this._clear = clear}
+  rewind={(undo) => {this._undo = undo}}
+  clear={(clear) => {this._clear = clear}}
   color={'#000000'}
   strokeWidth={4}
+  onChangeStrokes={(strokes) => console.log(strokes)}
 />
-```
 
 ### Props
+**strokes** [Array] - set with some initial data. (defaults to [])
+
 **containerStyle** [Object] - style for the container of the draw component.
 
 **color** [String] - string representation of pen color (defaults to '#000000')
@@ -45,6 +48,9 @@ import RNDraw from 'rn-draw'
 **rewind** [Func] - a function for passing the draw component's undo functionality
 
 **clear** [Func] - a function for passing the draw component's clear functionality
+
+**onChangeStrokes** [Func] - callback that is called when the draw changes.
+
   
 ## Work in progress
 
