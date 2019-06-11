@@ -45,12 +45,17 @@ import RNDraw from 'rn-draw'
 
 **strokeWidth** [Number] - width of pen strokes (defaults to 4)
 
+**editOpacity** [Number] - Opacity of pen while editing (defaults to 0.7)
+
 **rewind** [Func] - a function for passing the draw component's undo functionality
 
 **clear** [Func] - a function for passing the draw component's clear functionality
 
 **onChangeStrokes** [Func] - callback that is called when the draw changes.
 
+**simplifyTolerance** [Number] - Affects the amount of simplification (defaults to 1)
+
+**lineGenerator** [Func] - Function to generate advanced curves. (optional)
   
 ## Work in progress
 
