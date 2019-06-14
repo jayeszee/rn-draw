@@ -37,6 +37,8 @@ import RNDraw from 'rn-draw'
 />
 
 ### Props
+**drawActive** [Boolean] - toggle draw enable/disable. (defaults to true)
+
 **strokes** [Array] - set with some initial data. (defaults to [])
 
 **containerStyle** [Object] - style for the container of the draw component.
@@ -52,6 +54,10 @@ import RNDraw from 'rn-draw'
 **clear** [Func] - a function for passing the draw component's clear functionality
 
 **onChangeStrokes** [Func] - callback that is called when the draw changes.
+
+**onRewind** [Func] - callback that is called when the draw rewind.
+
+**onClear** [Func] - callback that is called when the draw clear.
 
 **simplifyTolerance** [Number] - Affects the amount of simplification (defaults to 1)
 

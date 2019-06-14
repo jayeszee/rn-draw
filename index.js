@@ -1,3 +1,2 @@
-import pad from './src/view/pad'
 
-module.exports = pad
+export { default as pad } from './src/view/pad';

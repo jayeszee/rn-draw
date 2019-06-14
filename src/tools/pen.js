@@ -1,9 +1,9 @@
 import simplify from "./simplify";
 
-const d3 = require("d3-shape")
+const d3 = require("d3-shape");
 const defaultLineGenerator = d3.line()
-  .x(function (d) { return d.x; })
-  .y(function (d) { return d.y; })
+  .x(function(d) { return d.x; })
+  .y(function(d) { return d.y; })
   .curve(d3.curveCatmullRom.alpha(0.5));
 
 export default class Pen {
@@ -20,12 +20,12 @@ export default class Pen {
   }
 
   rewindStroke() {
-    if (this.strokes.length < 1) return
-    this.strokes.pop()
+    if (this.strokes.length < 1) { return; }
+    this.strokes.pop();
   }
 
   setOffset(options) {
-    if (!options) return
+    if (!options) { return; }
     this._offsetX = options.x;
     this._offsetY = options.y;
   }
@@ -45,15 +45,16 @@ export default class Pen {
       }
       return defaultLineGenerator(simplifiedPathPoints);
     } else {
-      return ''
+      return '';
     }
   }
 
   clear = () => {
-    this.strokes = []
+    this.strokes = [];
   }
 
   copy() {
+    // error  'Reaction' is not defined  no-undef
     return new Reaction(this.strokes.slice());
   }
 }
