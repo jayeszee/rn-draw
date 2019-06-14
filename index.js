@@ -1,2 +1,2 @@
 
-export { default as pad } from './src/view/pad';
+export { default as DrawPad } from './src/view/DrawPad';
